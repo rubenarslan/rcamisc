@@ -1,0 +1,20 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# rcamisc
+
+Miscellaneous helpers for plotting, data wrangling and staying
+sane that I migrated here from `codebook` and `formr` to make them leaner.
+
+## [Documentation](https://rubenarslan.github.io/rcamisc/)
