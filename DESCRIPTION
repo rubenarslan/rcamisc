@@ -24,7 +24,8 @@ Imports:
   pryr,
   reshape2,
   stringr,
-  tidyr
+  tidyr,
+  rio
 Suggests:
   knitr,
   roxygen2

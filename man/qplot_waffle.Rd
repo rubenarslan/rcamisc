@@ -30,5 +30,5 @@ hard to see, consider showing hundreds, thousands etc.
 To avoid the Hermann grid illusion, don't use dark colours.
 }
 \examples{
-qplot_waffle(rep(1:2,each=10))
+qplot_waffle(rep(1:2,each=5))
 }

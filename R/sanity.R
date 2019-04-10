@@ -41,10 +41,30 @@ amigoingmad = function(package = "dplyr", fix = TRUE, iteration = 0 ) {
       base::detach(name = want_package, character.only = TRUE)
       base::library(package, character.only = TRUE)
       message("Tried to fix this, calling myself again to make sure...")
-      amigoingmad(fix, package, iteration + 1)
+      amigoingmad(package, fix, iteration + 1)
       message("Sanity restored!")
     }
   } else if (iteration == 0) {
     message("Everything looks normal. Maybe it's you.")
+  }
+}
+
+#' Open in Excel
+#'
+#' Simple helper, so I don't complain about the slugginess of RStudio's View so much
+#'
+#' @param x a dataframe to open in Excel
+#' @export
+#' @examples
+#' \dontrun{
+#' view_in_excel(Titanic)
+#' }
+view_in_excel <- function(x) {
+  if (interactive()) {
+    excel <- paste0(tempdir(), "/",
+                    deparse(substitute(x)),
+                    ".xlsx")
+    rio::export(x, excel)
+    system(paste('open -a "Microsoft Excel"', excel))
   }
 }
