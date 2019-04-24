@@ -25,7 +25,8 @@ Imports:
   reshape2,
   stringr,
   tidyr,
-  rio
+  rio,
+  packrat
 Suggests:
   knitr,
   roxygen2
