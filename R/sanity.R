@@ -95,7 +95,7 @@ bibliography = function(overwrite_bib = FALSE,
   }
   # use internal function to read lockfile (uses readDcf)
   if (cite_only_directly_called) {
-    package_names = renv::dependencies("./")
+    package_names = unique(renv::dependencies("./")[,"Package"])
   } else {
     stop("not implemented")
     # stopifnot(file.exists(lockfile_path))
