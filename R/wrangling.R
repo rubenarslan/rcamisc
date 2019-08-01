@@ -153,3 +153,50 @@ repeat_last = function(x, forward = TRUE, maxgap = Inf, na.rm = FALSE) {   # rep
   if (!forward) x = rev(x)           # second reversion
   x
 }
+
+
+#' aggregates two variables from two sources into one
+#'
+#' Takes two variables with different missings
+#' and gives one variable with values of the second
+#' variable substituted where the first had missings.
+#'
+#' @param df data.frame or variable
+#' @param new_var new variable name
+#' @param var1 first source. Assumed to be new_var.x (default suffixes after merging)
+#' @param var2 second source. Assumed to be new_var.y (default suffixes after merging)
+#' @param remove_old_variables Defaults to not keeping var1 and var2 in the resulting df.
+#' @export
+#' @examples
+#' cars$dist.x = cars$dist
+#' cars$dist.y = cars$dist
+#' cars$dist.y[2:5] = NA
+#' cars$dist.x[10:15] = NA # sprinkle missings
+#' cars$dist = NULL # remove old variable
+#' cars = aggregate2sources(cars, 'dist')
+aggregate2sources = function(df, new_var = NULL, var1 = NULL, var2 = NULL,
+                             remove_old_variables = TRUE) {
+  if (!is.null(new_var) && ncol(df) == 2) {
+    new_var <- names(df)[1]
+    var1 <- names(df)[1]
+    var2 <- names(df)[2]
+  }
+  if (is.null(var1) && is.null(var2)) {
+    var1 = paste0(new_var, ".x")
+    var2 = paste0(new_var, ".y")
+  }
+  if (exists(new_var, where = df)) {
+    warning(paste(new_var, "already exists. Maybe delete it or choose a different name, if you're saving over your original dataframe."))
+  }
+  df[, new_var] = df[, var1]
+  oldmiss = sum(is.na(df[, new_var]))
+  df[is.na(df[, var1]), new_var] = df[is.na(df[, var1]), var2]
+
+  if (remove_old_variables) {
+    df[, var1] = NULL
+    df[, var2] = NULL
+  }
+
+  message(paste(oldmiss - sum(is.na(df[, new_var])), " fewer missings"))
+  df
+}

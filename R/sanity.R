@@ -70,9 +70,9 @@ view_in_excel <- function(x) {
 }
 
 
-#' build a bibliography bibtex file from your packrat lockfile
+#' build a bibliography bibtex file from your lockfile
 #'
-#' Packrat helps you maintain consistent package versions for a project. To be able to give due credit in a way that academics understand, it's helpful to be able to generate citations.
+#' Renv helps you maintain consistent package versions for a project. To be able to give due credit in a way that academics understand, it's helpful to be able to generate citations.
 #'
 #'
 #' @param overwrite_bib whether to overwrite an existing bibtex file of the same name
@@ -80,26 +80,27 @@ view_in_excel <- function(x) {
 #' @param cite_only_directly_called whether to call only the packages you called yourself (default) or also their dependencies
 #' @param lockfile_path path to the packrat lock file to use
 #' @param bibliography_path path to the bibtex file to generate
-#' @param cite_packrat whether to cite packrat even if it's not loaded explicitly, defaults to the reverse of cite_only_directly_called
+#' @param cite_renv whether to cite renv even if it's not loaded explicitly, defaults to the reverse of cite_only_directly_called
 #' @export
 #'
-packrat_bibliography = function(overwrite_bib = FALSE,
+bibliography = function(overwrite_bib = FALSE,
                                 silent = FALSE,
                                 cite_only_directly_called = TRUE,
-                                lockfile_path = "packrat/packrat.lock",
-                                bibliography_path = "packrat_bibliography.bibtex",
-                                cite_packrat = !cite_only_directly_called) {
+                                lockfile_path = "renv.lock",
+                                bibliography_path = "bibliography.bibtex",
+                                cite_renv = !cite_only_directly_called) {
 
   if (file.exists(bibliography_path) && !overwrite_bib) {
     stop("Bibliography file existed and won't be overwritten, specify overwrite_bib = TRUE.")
   }
   # use internal function to read lockfile (uses readDcf)
   if (cite_only_directly_called) {
-    package_names = packrat:::dirDependencies("./")
+    package_names = renv::dependencies("./")
   } else {
-    stopifnot(file.exists(lockfile_path))
-    packages = packrat:::readLockFilePackages(lockfile_path)
-    package_names = names(packages) # get pkg names
+    stop("not implemented")
+    # stopifnot(file.exists(lockfile_path))
+    # packages = renv:::(lockfile_path)
+    # package_names = names(packages) # get pkg names
   }
 
   citation_objects = list()
@@ -107,8 +108,8 @@ packrat_bibliography = function(overwrite_bib = FALSE,
   citation_objects$R$note = paste("version", as.character(getRversion()))
   citation_objects$R$key = "R"
 
-  if (cite_packrat) {
-    package_names = union("packrat", package_names)
+  if (cite_renv) {
+    package_names = union("renv", package_names)
   }
 
   for (i in seq_along(package_names)) {
