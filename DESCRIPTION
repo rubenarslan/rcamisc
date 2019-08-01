@@ -1,7 +1,7 @@
 Package: rcamisc
 Type: Package
 Title: rcamisc: Plot, wrangle and stay sane
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: c(
     person("Ruben", "Arslan",
     email = "rubenarslan@gmail.com",
