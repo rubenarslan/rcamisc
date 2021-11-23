@@ -4,8 +4,13 @@
 \alias{aggregate2sources}
 \title{aggregates two variables from two sources into one}
 \usage{
-aggregate2sources(df, new_var = NULL, var1 = NULL, var2 = NULL,
-  remove_old_variables = TRUE)
+aggregate2sources(
+  df,
+  new_var = NULL,
+  var1 = NULL,
+  var2 = NULL,
+  remove_old_variables = TRUE
+)
 }
 \arguments{
 \item{df}{data.frame or variable}

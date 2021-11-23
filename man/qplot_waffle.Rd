@@ -4,8 +4,14 @@
 \alias{qplot_waffle}
 \title{Waffle plot}
 \usage{
-qplot_waffle(x, shape = 15, rows = NULL, cols = NULL,
-  drop_shadow_h = -0.3, drop_shadow_v = 0.3)
+qplot_waffle(
+  x,
+  shape = 15,
+  rows = NULL,
+  cols = NULL,
+  drop_shadow_h = -0.3,
+  drop_shadow_v = 0.3
+)
 }
 \arguments{
 \item{x}{a variable with not too many unique values}

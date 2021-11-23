@@ -4,15 +4,27 @@
 \alias{geom_shady_smooth}
 \title{iterate adding ribbons to a ggplot2 plot at varying confidence levels to shade by confidence. Horribly inefficient, because smooth stat is computed every time, but flexible.}
 \usage{
-geom_shady_smooth(mapping = NULL, data = NULL, stat = "smooth",
-  method = "auto", formula = y ~ x, se = TRUE,
-  position = "identity", na.rm = FALSE, show.legend = NA,
-  inherit.aes = TRUE, levels = c(0.6, 0.8, 0.95), base_alpha = 1,
-  fill_gradient = NULL, fill = "black", ...)
+geom_shady_smooth(
+  mapping = NULL,
+  data = NULL,
+  stat = "smooth",
+  method = "auto",
+  formula = y ~ x,
+  se = TRUE,
+  position = "identity",
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = TRUE,
+  levels = c(0.6, 0.8, 0.95),
+  base_alpha = 1,
+  fill_gradient = NULL,
+  fill = "black",
+  ...
+)
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \code{\link[=aes]{aes()}} or
-\code{\link[=aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the
+\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}} or
+\code{\link[ggplot2:aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the
 default), it is combined with the default mapping at the top level of the
 plot. You must supply \code{mapping} if there is no plot mapping.}
 
@@ -20,11 +32,11 @@ plot. You must supply \code{mapping} if there is no plot mapping.}
 options:
 
 If \code{NULL}, the default, the data is inherited from the plot
-data as specified in the call to \code{\link[=ggplot]{ggplot()}}.
+data as specified in the call to \code{\link[ggplot2:ggplot]{ggplot()}}.
 
 A \code{data.frame}, or other object, will override the plot
 data. All objects will be fortified to produce a data frame. See
-\code{\link[=fortify]{fortify()}} for which variables will be created.
+\code{\link[ggplot2:fortify]{fortify()}} for which variables will be created.
 
 A \code{function} will be called with a single argument,
 the plot data. The return value must be a \code{data.frame}, and
@@ -33,23 +45,27 @@ from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
 \item{stat}{defaults to smooth}
 
-\item{method}{Smoothing method (function) to use, accepts either a character vector,
-e.g. \code{"auto"}, \code{"lm"}, \code{"glm"}, \code{"gam"}, \code{"loess"} or a function, e.g.
-\code{MASS::rlm} or \code{mgcv::gam}, \code{stats::lm}, or \code{stats::loess}.
+\item{method}{Smoothing method (function) to use, accepts either
+\code{NULL} or a character vector, e.g. \code{"lm"}, \code{"glm"}, \code{"gam"}, \code{"loess"}
+or a function, e.g. \code{MASS::rlm} or \code{mgcv::gam}, \code{stats::lm}, or \code{stats::loess}.
+\code{"auto"} is also accepted for backwards compatibility.  It is equivalent to
+\code{NULL}.
 
-For \code{method = "auto"} the smoothing method is chosen based on the
+For \code{method = NULL} the smoothing method is chosen based on the
 size of the largest group (across all panels). \code{\link[stats:loess]{stats::loess()}} is
 used for less than 1,000 observations; otherwise \code{\link[mgcv:gam]{mgcv::gam()}} is
-used with \code{formula = y ~ s(x, bs = "cs")}. Somewhat anecdotally,
+used with \code{formula = y ~ s(x, bs = "cs")} with \code{method = "REML"}. Somewhat anecdotally,
 \code{loess} gives a better appearance, but is \eqn{O(N^{2})}{O(N^2)} in memory,
 so does not work for larger datasets.
 
 If you have fewer than 1,000 observations but want to use the same \code{gam()}
-model that \code{method = "auto"} would use, then set
-\code{method = "gam", formula = y ~ s(x, bs = "cs")}.}
+model that \code{method = NULL} would use, then set
+\verb{method = "gam", formula = y ~ s(x, bs = "cs")}.}
 
 \item{formula}{Formula to use in smoothing function, eg. \code{y ~ x},
-\code{y ~ poly(x, 2)}, \code{y ~ log(x)}}
+\code{y ~ poly(x, 2)}, \code{y ~ log(x)}. \code{NULL} by default, in which case
+\code{method = NULL} implies \code{formula = y ~ x} when there are fewer than 1,000
+observations and \code{formula = y ~ s(x, bs = "cs")} otherwise.}
 
 \item{se}{Display confidence interval around smooth? (\code{TRUE} by default, see
 \code{level} to control.)}
@@ -69,7 +85,7 @@ display.}
 \item{inherit.aes}{If \code{FALSE}, overrides the default aesthetics,
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
-the default plot specification, e.g. \code{\link[=borders]{borders()}}.}
+the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
 
 \item{levels}{the confidence levels that are supposed to be displayed, defaults to 0.6, 0.8, 0.95}
 

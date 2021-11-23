@@ -4,8 +4,7 @@
 \alias{mtmm}
 \title{multi trait multi method matrix}
 \usage{
-mtmm(variables = NULL, reliabilities = NULL, split_regex = "_",
-  cors = NULL)
+mtmm(variables = NULL, reliabilities = NULL, split_regex = "_", cors = NULL)
 }
 \arguments{
 \item{variables}{data frame of variables that are supposed to be correlated}

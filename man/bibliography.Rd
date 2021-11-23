@@ -4,10 +4,14 @@
 \alias{bibliography}
 \title{build a bibliography bibtex file from your lockfile}
 \usage{
-bibliography(overwrite_bib = FALSE, silent = FALSE,
-  cite_only_directly_called = TRUE, lockfile_path = "renv.lock",
+bibliography(
+  overwrite_bib = FALSE,
+  silent = FALSE,
+  cite_only_directly_called = TRUE,
+  lockfile_path = "renv.lock",
   bibliography_path = "bibliography.bibtex",
-  cite_renv = !cite_only_directly_called)
+  cite_renv = !cite_only_directly_called
+)
 }
 \arguments{
 \item{overwrite_bib}{whether to overwrite an existing bibtex file of the same name}

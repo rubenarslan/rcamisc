@@ -18,19 +18,19 @@ License: MIT + file LICENSE
 Depends:
     R (>= 3.0.2)
 Imports:
-  methods,
   dplyr,
   ggplot2,
   pryr,
   reshape2,
   stringr,
-  tidyr,
   rio,
-  renv
+  renv,
+  rmarkdown,
+  rstudioapi
 Suggests:
   knitr,
   roxygen2
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE) 
 VignetteBuilder: knitr
 Remotes: rstudio/renv
