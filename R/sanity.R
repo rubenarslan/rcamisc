@@ -64,7 +64,7 @@ view_in_excel <- function(x) {
     excel <- paste0(tempdir(), "/",
                     deparse(substitute(x)),
                     ".xlsx")
-    rio::export(x, excel)
+    rio::export(x, excel, colWidths = "auto", firstRow = TRUE)
     system(paste('open -a "Microsoft Excel"', excel))
   }
 }
