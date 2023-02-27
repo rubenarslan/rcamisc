@@ -4,12 +4,12 @@
 \alias{render_job}
 \title{render an rmarkdown file in background using RStudio Jobs}
 \usage{
-render_job(input, params = list(), output_file)
+render_job(input, params = NULL, output_file = NULL)
 }
 \arguments{
-\item{input}{.rmd document to be knitted}
+\item{input}{.Rmd document to be knitted}
 
-\item{params}{params to pass to the .rmd}
+\item{params}{params to pass to the .Rmd}
 
 \item{output_file}{name of the output_file (and the job)}
 }

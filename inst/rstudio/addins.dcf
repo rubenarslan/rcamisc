@@ -1,0 +1,4 @@
+Name: Knit document as job
+Description: Allows you to knit multiple documents concurrently.
+Binding: render_job
+Interactive: true
